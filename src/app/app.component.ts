@@ -1,14 +1,24 @@
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, NgOptimizedImage],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'article-preview-component';
+  isActive = false;
+  isMobile = this.detectMobileDevice();
+
+  onClick(): void {
+    this.isActive = !this.isActive;
+    console.log(this.isActive);
+  }
+
+  detectMobileDevice(): boolean {
+    return window.innerWidth <= 1080; // Adjust the width threshold as needed
+  }
 }
